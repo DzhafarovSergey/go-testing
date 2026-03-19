@@ -1,8 +1,10 @@
 package hello
 
-func Hello(name string) string {
+import "errors"
+
+func Hello(name string) (string, error) {
 	if name == "" {
-		return "Hello, world"
+		return "", errors.New("name is empty")
 	}
-	return "Hello, " + name + "!"
+	return "Hello, " + name + "!", nil
 }
