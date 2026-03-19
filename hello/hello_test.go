@@ -2,36 +2,49 @@ package hello
 
 import (
 	"errors"
-	"fmt"
+	//"fmt"
 	"testing"
 )
+
+func assertString(t testing.TB, got, want string) {
+	t.Helper()
+	if got != want {
+		t.Errorf("got %s, want %s", got, want)
+	}
+}
+
+func assertError(t testing.TB, got error, want bool) {
+	t.Helper()
+	if (got != nil) != want {
+		if want {
+			t.Fatalf("ожидалась ошибка, но её нет")
+		}
+		t.Fatalf("не ожидалась ошибка, но получена: %v", got)
+	}
+}
 
 func TestHello(t *testing.T) {
 	//Проверка пустой строки
 	cases := []struct {
-		name string
-		want string
-		err  error
+		name      string
+		want      string
+		test_name string
+		err       error
 	}{
-		{"Anton", "Hello, Anton!", nil},
-		{"Sergey", "Hello, Sergey!", nil},
-		{"", "", errors.New("name is empty")},
+		{"Go", "Hello, Go", "basic", nil},
+		{"World", "Hello, World", "basic", nil},
+		{"", "", "empty", errors.New("name is empty")},
+		{"Гофер", "Hello, Гофер", "unicode", nil},
 	}
-
 	for _, c := range cases {
-		name_test := fmt.Sprintf("%s_%s", c.name, c.want)
-		t.Run(name_test, func(t *testing.T) {
+		t.Run(c.test_name, func(t *testing.T) {
 			got, err := Hello(c.name)
-			if c.err != nil {
-				if err == nil || err.Error() != c.err.Error() {
-					t.Errorf("got %s, want %s", err, c.err)
-				}
+			w := false
+			if c.name == "" {
+				w = true
 			}
-
-			if got != c.want {
-				t.Errorf("got %s, want %s", got, c.want)
-			}
-
+			assertError(t, err, w)
+			assertString(t, got, c.want)
 		})
 	}
 }

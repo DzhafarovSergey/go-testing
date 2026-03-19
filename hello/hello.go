@@ -6,5 +6,5 @@ func Hello(name string) (string, error) {
 	if name == "" {
 		return "", errors.New("name is empty")
 	}
-	return "Hello, " + name + "!", nil
+	return "Hello, " + name, nil
 }
