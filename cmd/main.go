@@ -7,7 +7,10 @@ import (
 )
 
 func main() {
-	name := hello.Hello("Andrey")
+	name, err := hello.Hello("Andrey")
+	if err != nil {
+		fmt.Println(fmt.Sprintf("Hello failed: %v", err))
+	}
 	fmt.Println(name)
 
 	number_even := even.IsEven(4)
