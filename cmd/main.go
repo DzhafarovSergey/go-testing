@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"github.com/DzhafarovSergey/go-testing.git/even"
 	"github.com/DzhafarovSergey/go-testing.git/hello"
+	"github.com/DzhafarovSergey/go-testing.git/reverse"
 )
 
 func main() {
@@ -13,9 +14,18 @@ func main() {
 	}
 	fmt.Println(name)
 
-	number_even := even.IsEven(4)
-	fmt.Println(number_even)
+	numberEven := even.IsEven(4)
+	fmt.Println(numberEven)
 
-	number_no_even := even.IsEven(5)
-	fmt.Println(number_no_even)
+	numberNoEven := even.IsEven(5)
+	fmt.Println(numberNoEven)
+
+	reverseHello := reverse.Reverse("hello")
+	fmt.Println(reverseHello)
+	reverseHead := reverse.Reverse("главный")
+	fmt.Println(reverseHead)
+	reverseRune := reverse.Reverse("😉🙂")
+	fmt.Println(reverseRune)
+	reverseEmpty := reverse.Reverse("")
+	fmt.Println(reverseEmpty)
 }
